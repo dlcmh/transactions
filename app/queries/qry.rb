@@ -1,0 +1,1 @@
+class Qry < Query; end
