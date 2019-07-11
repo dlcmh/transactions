@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
+  gem 'faker'
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -38,6 +39,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'seedbank'
+
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
