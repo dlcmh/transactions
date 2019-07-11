@@ -1,0 +1,19 @@
+h1 Queries::Months
+
+- p 'lol'
+- p @q
+
+- cols = @q.columns
+
+table
+  thead
+    tr
+      - cols.each do |col|
+        th = col.humanize
+  tbody
+    - @q.each do |row|
+      - p 'mi'
+      - p row
+      tr
+        - cols.each do |col|
+          td = row[col]

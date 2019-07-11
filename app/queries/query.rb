@@ -55,7 +55,10 @@ class Query
   end
 
   def columns
-    limit(0).results.columns
+    current_limit = opts.limit # obtains value for reset
+    result = limit(0).results.columns
+    current_limit.present? ? limit(current_limit) : opts.delete_field(:limit) # reset
+    result
   end
 
   def combinations?
@@ -111,7 +114,10 @@ class Query
   end
 
   def open_structs
-    hashes.map { |h| OpenStruct.new h }
+    r = hashes.map { |h| OpenStruct.new h }
+    p 'oi'
+    p r
+    r
   end
 
   def order(hsh)
