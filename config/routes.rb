@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   namespace :queries do
     resources :months
+    resources :monthly_sales_total
   end
 end

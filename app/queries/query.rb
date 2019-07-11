@@ -114,10 +114,7 @@ class Query
   end
 
   def open_structs
-    r = hashes.map { |h| OpenStruct.new h }
-    p 'oi'
-    p r
-    r
+    hashes.map { |h| OpenStruct.new h }
   end
 
   def order(hsh)
