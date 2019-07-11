@@ -1,24 +1,10 @@
-# README
+# Demo of pre-gem utility `Query`
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. `git clone https://github.com/dlcmh/transactions`
+2. `cd transactions`
+3. `yarn`
+4. `bundle`
+5. `rails db:create`
+6. `./db_restore`
