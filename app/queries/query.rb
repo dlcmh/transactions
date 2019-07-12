@@ -1,4 +1,6 @@
 class Query
+  class Error < StandardError; end
+
   class << self
     def klass
       :Query
@@ -55,7 +57,7 @@ class Query
   end
 
   def columns
-    current_limit = opts.limit # obtains value for reset
+    current_limit = opts.limit ? opts.limit.scan(/(\d+)/).first.first : nil # get value for reset
     result = limit(0).results.columns
     current_limit.present? ? limit(current_limit) : opts.delete_field(:limit) # reset
     result
@@ -133,8 +135,9 @@ class Query
     maybe_raise_no_query_defined
     ActiveRecord::Base.connection.select_all(formatted_sql, self.class.name)
   rescue => e
-    @error = e
-    raise e
+    msg = "<##{self.class.name}:#{object_id}>\n\n=> #{e}\n\n#{opts}"
+    @error = msg
+    raise Error, msg
   end
 
   def rows

@@ -1,0 +1,14 @@
+h1 Queries::TopSellingProducts
+
+- cols = @q.columns
+
+table
+  thead
+    tr
+      - cols.each do |col|
+        th = col.humanize
+  tbody
+    - @q.each do |row|
+      tr
+        - cols.each do |col|
+          td = row[col]

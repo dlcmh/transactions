@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :queries do
+    resources :top_selling_products
     resources :months
     resources :monthly_sales_total
   end
