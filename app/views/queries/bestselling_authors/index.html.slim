@@ -1,0 +1,18 @@
+h1 Queries::#{@q.class.name}
+
+- cols = @q.columns
+
+table
+  thead
+    tr
+      - cols.each do |col|
+        th = col.humanize
+  tbody
+    - @q.each do |row|
+      tr
+        - cols.each do |col|
+          td
+            - if col == 'authors'
+             = JSON.parse(row[col]).join(', ')
+            - else
+              = row[col]

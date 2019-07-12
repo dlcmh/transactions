@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :months
     resources :monthly_sales_total
     resources :ranked_product_sales
+    resources :bestselling_authors
   end
 end
