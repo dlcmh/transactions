@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :worst_selling_products
     resources :months
     resources :monthly_sales_total
+    resources :ranked_product_sales
   end
 end
