@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%= controller_name == 'home' ? nil : link_to('Home', root_path) %>
     <%= yield %>
   </body>
 </html>
