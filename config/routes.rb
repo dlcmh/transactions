@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :queries do
     resources :top_selling_products
+    resources :worst_selling_products
     resources :months
     resources :monthly_sales_total
   end
