@@ -1,7 +1,7 @@
 class BestsellingAuthors < Query
   def top_ten
-    where('top_ranked <= 10')
-    order(top_ranked: :asc)
+    where('ranking <= 10')
+    order(ranking: :asc)
   end
 
   private
@@ -10,12 +10,14 @@ class BestsellingAuthors < Query
   def query
     <<~SQL.freeze
       SELECT
-        p.product_id,
+        p.product_name book_title,
         p.category_names authors,
         s.sales_amount,
         RANK() OVER (
           ORDER BY sales_amount DESC
-        ) top_ranked
+        ) ranking,
+        p.category_count author_count,
+        ROUND((s.sales_amount / p.category_count),2) attributable_sale_per_author
       FROM #{TotalSalesByProduct.new} s
       NATURAL JOIN #{CategoriesOfProducts.new} p
     SQL
