@@ -14,10 +14,10 @@ class RankedProductSales < Query
         p.product_name,
         s.sales_amount,
         RANK() OVER (
-          ORDER BY sales_amount DESC
+          ORDER BY s.sales_amount DESC
         ) top_ranked,
         RANK() OVER (
-          ORDER BY sales_amount ASC
+          ORDER BY s.sales_amount ASC
         ) bottom_ranked
       FROM #{TotalSalesByProduct.new} s
       NATURAL JOIN #{Products.new} p
