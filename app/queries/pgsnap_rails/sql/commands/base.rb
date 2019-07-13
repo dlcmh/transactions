@@ -13,7 +13,7 @@ module PgsnapRails
         end
 
         def append_tree(*args)
-          puts "#{node_name}"
+          nodes[node_name] ? nodes[node_name] << args : nodes[node_name] = args
         end
 
         def build
