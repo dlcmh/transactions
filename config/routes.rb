@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :queries do
+    resources :all
+    resources :bestselling_authors
+    resources :monthly_sales_total
+    resources :months
+    resources :ranked_product_sales
     resources :top_selling_products
     resources :worst_selling_products
-    resources :months
-    resources :monthly_sales_total
-    resources :ranked_product_sales
-    resources :bestselling_authors
   end
 end
