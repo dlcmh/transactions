@@ -32,6 +32,23 @@ module PgsnapRails
       results.to_a
     end
 
+    def columns
+      current_limit = tree[:Limit].count
+      add_limit(Limit.new(0))
+      retrieve_results_from_database
+      r = results.columns
+      if current_limit
+        add_limit(Limit.new(current_limit))
+      else
+        remove_node_from_tree(:Limit)
+      end
+      r
+    end
+
+    def remove_node_from_tree(node_type)
+      tree.delete(node_type)
+    end
+
     def to_s
       tree
     end

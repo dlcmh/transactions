@@ -9,6 +9,8 @@ class Debug
     select.add_limit(limit)
     select.add_from(from)
     select.add_select_list(select_list)
-    select.all
+    select.columns
+    # select.all
+    select
   end
 end
