@@ -58,11 +58,9 @@ module PgsnapRails
 
     def retrieve_results_from_database
       return if retrieval_done
+      build_missing_from_clause
+      build_missing_select_command
       @results = Pg::Results.retrieve(built_sql, self.class.name.demodulize.underscore)
     end
-
-    # def inspect
-    #   'lol'
-    # end
   end
 end
