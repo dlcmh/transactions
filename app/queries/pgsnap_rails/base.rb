@@ -4,5 +4,9 @@ module PgsnapRails
     extend Utils::MethodCallingConvenience
     include DotCommands
     include Utils::TableName
+
+    def inspect
+      'lol'
+    end
   end
 end
