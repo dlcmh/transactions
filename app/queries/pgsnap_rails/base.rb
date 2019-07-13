@@ -11,6 +11,8 @@ module PgsnapRails
       end
     end
 
+    attr_reader :nodes
+
     def inspect
       'lol'
     end
