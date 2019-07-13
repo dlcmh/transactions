@@ -4,6 +4,10 @@ module PgsnapRails
       select_builder.all
     end
 
+    def columns
+      select_builder.columns
+    end
+
     def limit(count)
       select_builder.add_to_tree PgsnapRails::Limit.new(count)
       self

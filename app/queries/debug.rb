@@ -1,6 +1,7 @@
 class Debug
   def self.keywords
-    Pgsnap.table(:categories).limit(10).all
+    Pgsnap.table(:categories).limit(10).columns
+    # Pgsnap.table(:categories).limit(10).all
   end
 
   def self.select_test
