@@ -40,13 +40,13 @@ module PgsnapRails
       current_limit = tree[:Limit]&.count
       add_limit(Limit.new(0))
       retrieve_results_from_database
-      r = results.columns
-      if current_limit
-        add_limit(Limit.new(current_limit))
-      else
-        remove_node_from_tree(:Limit)
+      results.columns.tap do
+        if current_limit
+          add_limit(Limit.new(current_limit))
+        else
+          remove_node_from_tree(:Limit)
+        end
       end
-      r
     end
 
     def remove_node_from_tree(node_type)

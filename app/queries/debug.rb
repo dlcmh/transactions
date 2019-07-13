@@ -15,7 +15,7 @@ class Debug
     # select.add_from(from)
     # select.add_select_list(select_list)
 
-    select.columns
+    p select.columns
     # select.all
 
     select
