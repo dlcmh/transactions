@@ -6,7 +6,9 @@ module PgsnapRails
       include Utils::NodeName
 
       def self.method_missing(method, *args, &block)
-        new.send(method, *args, &block)
+        new.tap do |obj|
+          obj.send(method, *args, &block)
+        end
       end
 
       attr_reader :nodes
@@ -21,9 +23,20 @@ module PgsnapRails
         @nodes = {}
       end
 
-      def append_tree(*args)
-        nodes[node_name] ? nodes[node_name] << args : nodes[node_name] = args
-        self
+      def append_tree(hsh)
+        return node[:args] << hsh[:args] if node
+        create_node(hsh)
+      end
+
+      def create_node(hsh)
+        nodes[node_name] = {
+          command: hsh[:command],
+          args: Array(hsh[:args])
+        }
+      end
+
+      def node
+        nodes[node_name]
       end
 
       def raise_need_implementation(method_name)
