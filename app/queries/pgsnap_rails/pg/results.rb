@@ -1,10 +1,11 @@
 module PgsnapRails
   module Pg
     class Results < Base
-      attr_reader :results
+      attr_reader :rows
 
-      def retrieve
-        @results = Exec.query('select * from users', 'Users').to_a
+      def retrieve(sql, class_name)
+        @rows = Exec.query(sql, class_name).to_a
+        self
       end
     end
   end

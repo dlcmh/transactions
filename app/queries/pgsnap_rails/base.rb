@@ -7,9 +7,14 @@ module PgsnapRails
       new.send(method, *args, &block)
     end
 
-    private
+    attr_reader :builder_name, :built_sql, :nodes, :results, :sql_builder
 
-    attr_reader :builder_name, :built_sql, :nodes, :sql_builder
+    def all
+      @results = Pg::Results.retrieve(built_sql, self.class.name.demodulize.underscore)
+      self
+    end
+
+    private
 
     def initialize
       @nodes = {}

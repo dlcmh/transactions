@@ -9,9 +9,5 @@ module PgsnapRails
       append_node Sql::Commands::Select::TableCommand.build(self.class.name.demodulize.underscore)
       build_sql
     end
-
-    def sql
-      nodes[:sql]
-    end
   end
 end
