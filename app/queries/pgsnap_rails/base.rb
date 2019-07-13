@@ -2,14 +2,15 @@ module PgsnapRails
   class Base
     class Error < StandardError; end
     include Utils::DelegateArrayMethods
-    include RetrievalDotCommands
-    include SqlBuildingDotCommands
+    # include RetrievalDotCommands
+    # include SqlBuildingDotCommands
+    include Keywords
 
     def self.method_missing(method, *args, &block)
       new.send(method, *args, &block)
     end
 
-    attr_reader :builder_name, :built_sql, :nodes, :results, :retrieval_done
+    attr_reader :builder_name, :built_sql, :nodes, :results, :retrieval_done, :select_builder
 
     def sql
       built_sql
@@ -18,6 +19,7 @@ module PgsnapRails
     private
 
     def initialize
+      @select_builder = PgsnapRails::Select.new
       @nodes = {}
       defn
     end
