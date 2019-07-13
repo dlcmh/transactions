@@ -1,7 +1,7 @@
 module Queries
   class AllController < ApplicationController
     def index
-      @q = Users
+      @q = AllTest
     end
   end
 end
