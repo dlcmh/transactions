@@ -9,7 +9,7 @@ module PgsnapRails
       new.send(method, *args, &block)
     end
 
-    attr_reader :builder_name, :built_sql, :nodes, :results, :retrieval_done, :sql_builder
+    attr_reader :builder_name, :built_sql, :nodes, :results, :retrieval_done
 
     def sql
       built_sql
@@ -19,7 +19,6 @@ module PgsnapRails
 
     def initialize
       @nodes = {}
-      @sql_builder = Builder
     end
 
     def append_node(hsh)
@@ -29,7 +28,7 @@ module PgsnapRails
     end
 
     def build_sql
-      @built_sql = sql_builder.build(nodes)
+      @built_sql = Builder.build(nodes)
     end
 
     def create_node(hsh)
