@@ -3,8 +3,8 @@ module PgsnapRails
     module Commands
       module Select
         class TableCommand < Base
-          def build(*args)
-            echo args
+          def build(table_name)
+            append_tree table_name
           end
         end
       end
