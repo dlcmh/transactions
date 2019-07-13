@@ -2,10 +2,13 @@ module PgsnapRails
   module Sql
     module Commands
       class Base
-        # class Error < StandardError; end
-        extend Utils::MethodCallingConvenience
+        class Error < StandardError; end
         include Utils::Echo
         include Utils::NodeName
+
+        def self.method_missing(method, *args, &block)
+          new.send(method, *args, &block)
+        end
 
         attr_reader :nodes
 

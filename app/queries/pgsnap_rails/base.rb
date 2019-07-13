@@ -1,10 +1,15 @@
 module PgsnapRails
   class Base
     class Error < StandardError; end
-    extend Utils::MethodCallingConvenience
     include DotCommands
     include Utils::TableName
-    include Utils::ReturnSelf
+
+    # returns self
+    def self.method_missing(method, *args, &block)
+      new.tap do |obj|
+        obj.send(method, *args, &block)
+      end
+    end
 
     def inspect
       'lol'
