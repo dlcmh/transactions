@@ -1,6 +1,6 @@
 module PgsnapRails
-  class From
-    attr_reader :args, :item
+  class Limit
+    attr_reader :args, :count
 
     def initialize(*args)
       @args = args
@@ -8,20 +8,20 @@ module PgsnapRails
     end
 
     def to_s
-      ['FROM', item].compact.join(' ')
+      ['LIMIT', count].compact.join(' ')
     end
 
     private
 
-    def item__params
-      @item, = args
+    def count__params
+      @count, = args
     end
 
     def validate
       if args.size == 1
-        item__params
+        count__params
       else
-        raise ArgumentError, 'Expected (1) item'
+        raise ArgumentError, 'Expected (1) count'
       end
     end
   end

@@ -10,6 +10,10 @@ module PgsnapRails
       add_node_to_tree(:From, node)
     end
 
+    def add_limit(node)
+      add_node_to_tree(:Limit, node)
+    end
+
     def add_node_to_tree(node_type, node)
       @node = node
       @node_type = node_type
@@ -37,7 +41,8 @@ module PgsnapRails
     def build_sql
       @built_sql = [
         tree[:SelectList],
-        tree[:From]
+        tree[:From],
+        tree[:Limit],
       ].compact.join(' ')
     end
 
