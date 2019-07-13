@@ -5,8 +5,8 @@ class Debug
     select_list = PgsnapRails::SelectList.new
     select_item = PgsnapRails::SelectItem.new(:*)
     select_list.add(select_item)
-    select.add_select_list(select_list)
     select.add_from(from)
+    select.add_select_list(select_list)
     select
   end
 end

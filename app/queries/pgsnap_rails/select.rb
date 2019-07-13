@@ -35,10 +35,10 @@ module PgsnapRails
     private
 
     def build_sql
-      select_list__build
-      # from_clause__build
-      # table_command__build
-      # limit_clause__build
+      @built_sql = [
+        tree[:SelectList],
+        tree[:From]
+      ].compact.join(' ')
     end
 
     def results_retrieval_class_name
@@ -50,19 +50,6 @@ module PgsnapRails
       # build_missing_from_clause
       # build_missing_select_list
       @results = Pg::Results.retrieve(built_sql, results_retrieval_class_name)
-    end
-
-    def select_list__build
-      return unless tree_has_node_type?
-      @built_sql = [built_sql, stringified_tree_node].compact.join(' ')
-    end
-
-    def stringified_tree_node
-      tree[node_type].to_s
-    end
-
-    def tree_has_node_type?
-      tree[node_type].present?
     end
 
     def validate_node_type
