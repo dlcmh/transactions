@@ -3,7 +3,6 @@ module PgsnapRails
     attr_reader :built_sql, :node, :node_type, :results, :retrieval_done, :tree
 
     def initialize
-      @built_sql = ''
       @tree = {}
     end
 
@@ -55,7 +54,7 @@ module PgsnapRails
 
     def select_list__build
       return unless tree_has_node_type?
-      @built_sql << stringified_tree_node
+      @built_sql = [built_sql, stringified_tree_node].compact.join(' ')
     end
 
     def stringified_tree_node
