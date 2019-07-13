@@ -3,6 +3,14 @@ class Debug
     Pgsnap.table(:categories).limit(10).all
   end
 
+  def self.select_test
+    select = PgsnapRails::Select.new
+    table = PgsnapRails::Table.new(:categories)
+    # select.add_table(table)
+    select.add_to_tree(table)
+    select
+  end
+
   def self.run
     select = PgsnapRails::Select.new
 
@@ -14,10 +22,10 @@ class Debug
     select_item = PgsnapRails::SelectItem.new(:*)
     select_list.add(select_item)
 
-    select.add_table(table)
-    # select.add_limit(limit)
-    # select.add_from(from)
-    # select.add_select_list(select_list)
+    # select.add_to_tree(table)
+    select.add_to_tree(limit)
+    select.add_to_tree(from)
+    select.add_to_tree(select_list)
 
     p select.columns
     # select.all

@@ -6,28 +6,12 @@ module PgsnapRails
       @tree = {}
     end
 
-    def add_from(node)
-      add_node_to_tree(:From, node)
-    end
-
-    def add_limit(node)
-      add_node_to_tree(:Limit, node)
-    end
-
-    def add_node_to_tree(node_type, node)
+    def add_to_tree(node)
       @node = node
-      @node_type = node_type
+      @node_type = node.class.name.demodulize.to_sym
       validate_node_type
       @tree[node_type] = node
       build_sql
-    end
-
-    def add_select_list(node)
-      add_node_to_tree(:SelectList, node)
-    end
-
-    def add_table(node)
-      add_node_to_tree(:Table, node)
     end
 
     def all
@@ -38,11 +22,11 @@ module PgsnapRails
 
     def columns
       current_limit = tree[:Limit]&.count
-      add_limit(Limit.new(0))
+      add_to_tree(Limit.new(0))
       retrieve_results_from_database
       results.columns.tap do
         if current_limit
-          add_limit(Limit.new(current_limit))
+          add_to_tree(Limit.new(current_limit))
         else
           remove_node_from_tree(:Limit)
         end
