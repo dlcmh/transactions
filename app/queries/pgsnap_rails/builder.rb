@@ -14,10 +14,7 @@ module PgsnapRails
     private
 
     def append_to_built_sql(str)
-      @built_sql = [
-        built_sql,
-        str
-      ].join(' ')
+      @built_sql = [built_sql, str].join(' ')
     end
 
     def from_clause__build
@@ -39,13 +36,6 @@ module PgsnapRails
       return unless nodes[:table_command]
       overwrite_built_sql str(:table_command)
     end
-
-    # def str(node_type)
-    #   [
-    #     nodes[node_type][:command],
-    #     nodes[node_type][:args].last
-    #   ].join(' ')
-    # end
 
     def str(node_type, use_all_args = false)
       arg_str = use_all_args ? nodes[node_type][:args].join(', ') : nodes[node_type][:args].last
