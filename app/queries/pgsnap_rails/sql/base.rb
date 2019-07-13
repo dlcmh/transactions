@@ -8,7 +8,7 @@ module PgsnapRails
       def self.method_missing(method, *args, &block)
         new.tap do |obj|
           obj.send(method, *args, &block)
-        end
+        end.nodes
       end
 
       attr_reader :nodes

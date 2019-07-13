@@ -13,8 +13,8 @@ module PgsnapRails
 
     attr_reader :nodes
 
-    def inspect
-      'lol'
-    end
+    # def inspect
+    #   'lol'
+    # end
   end
 end
