@@ -1,4 +1,15 @@
 class Debug
+  def self.items
+    select = PgsnapRails::Select.new
+    select_list = PgsnapRails::SelectList.new
+    select_list.with(:id, :first_name, '1 AS one')
+    select.add_to_tree(select_list)
+    select.add_to_tree PgsnapRails::From.new(:users)
+    select.add_to_tree PgsnapRails::Limit.new(4)
+    select
+    select.all
+  end
+
   def self.build_missing
     Users.limit(10).columns
     # Pgsnap.table(:categories).limit(10).all

@@ -2,13 +2,13 @@ module PgsnapRails
   class Select
     attr_reader :built_sql, :node, :node_type, :query_class, :results, :retrieval_done, :tree
 
-    def initialize(query_class:)
+    def initialize(query_class: self.class.name.demodulize.underscore)
       @query_class = query_class
       @tree = {}
     end
 
     def add_to_tree(node)
-      p "debug: #{node}"
+      # p "debug: #{node}"
       @node = node
       @node_type = node.class.name.demodulize.to_sym
       validate_node_type

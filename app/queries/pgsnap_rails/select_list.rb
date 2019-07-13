@@ -12,6 +12,13 @@ module PgsnapRails
       @items << item
     end
 
+    def with(*items)
+      validate_with(items)
+      items.each do |item|
+        @items << PgsnapRails::SelectItem.new(item)
+      end
+    end
+
     def to_s
       return unless items.present?
       [:SELECT, items.join(', ')].join(' ')
@@ -22,6 +29,11 @@ module PgsnapRails
     def validate
       return if item.class.name.demodulize == 'SelectItem'
       raise ArgumentError, 'not a valid SelectItem object'
+    end
+
+    def validate_with(items)
+      return if items.is_a?(Array)
+      raise ArgumentError, "#{items} is not a valid Array"
     end
   end
 end
