@@ -1,5 +1,5 @@
 module PgsnapRails
-  class Select
+  class SelectList
     attr_reader :item, :items
 
     def initialize
