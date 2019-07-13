@@ -1,12 +1,14 @@
 module PgsnapRails
   class Select
-    attr_reader :built_sql, :node, :node_type, :results, :retrieval_done, :tree
+    attr_reader :built_sql, :node, :node_type, :query_class, :results, :retrieval_done, :tree
 
-    def initialize
+    def initialize(query_class:)
+      @query_class = query_class
       @tree = {}
     end
 
     def add_to_tree(node)
+      p "debug: #{node}"
       @node = node
       @node_type = node.class.name.demodulize.to_sym
       validate_node_type
@@ -43,6 +45,17 @@ module PgsnapRails
 
     private
 
+    def build_missing_from_clause
+      add_to_tree(From.new(query_class)) unless tree[:From]
+    end
+
+    def build_missing_select_list
+      select_list = SelectList.new
+      select_item = SelectItem.new(:*)
+      select_list.add(select_item)
+      add_to_tree(select_list) unless tree[:SelectList]
+    end
+
     def build_sql
       if tree[:Table]
         @built_sql = [
@@ -64,8 +77,8 @@ module PgsnapRails
 
     def retrieve_results_from_database
       return if retrieval_done
-      # build_missing_from_clause
-      # build_missing_select_list
+      build_missing_from_clause
+      build_missing_select_list
       @results = Pg::Results.retrieve(built_sql, results_retrieval_class_name)
     end
 

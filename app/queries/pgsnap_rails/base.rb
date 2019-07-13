@@ -19,7 +19,7 @@ module PgsnapRails
     private
 
     def initialize
-      @select_builder = PgsnapRails::Select.new
+      @select_builder = PgsnapRails::Select.new(query_class: self.class.name.demodulize.underscore)
       @nodes = {}
       defn
     end

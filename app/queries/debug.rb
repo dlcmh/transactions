@@ -1,4 +1,9 @@
 class Debug
+  def self.build_missing
+    Users.limit(10).columns
+    # Pgsnap.table(:categories).limit(10).all
+  end
+
   def self.keywords
     Pgsnap.table(:categories).limit(10).columns
     # Pgsnap.table(:categories).limit(10).all
