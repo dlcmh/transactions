@@ -4,7 +4,11 @@ module PgsnapRails
       module Select
         class TableCommand < Base
           def build(table_name)
-            append_tree(command: 'TABLE', args: table_name)
+            {
+              builder_name: builder_name,
+              command: 'TABLE',
+              args: table_name
+            }
           end
         end
       end

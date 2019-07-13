@@ -4,7 +4,11 @@ module PgsnapRails
       module Select
         class FromClause < Base
           def build(from_item)
-            append_tree(command: 'FROM', args: from_item)
+            {
+              builder_name: builder_name,
+              command: 'FROM',
+              args: from_item
+            }
           end
         end
       end
