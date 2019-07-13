@@ -5,12 +5,12 @@ module PgsnapRails
     end
 
     def limit(count)
-      select_builder.add_limit PgsnapRails::Limit.new(count)
+      select_builder.add_to_tree PgsnapRails::Limit.new(count)
       self
     end
 
     def table(table_name = self.class.name.demodulize.underscore)
-      select_builder.add_table PgsnapRails::Table.new(:categories)
+      select_builder.add_to_tree PgsnapRails::Table.new(:categories)
       self
     end
   end
