@@ -1,3 +1,6 @@
 class Users < Pgsnap
-  select :id
+  def defn
+    select :id
+    limit 5
+  end
 end

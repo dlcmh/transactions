@@ -19,6 +19,7 @@ module PgsnapRails
 
     def initialize
       @nodes = {}
+      defn
     end
 
     def append_node(hsh)
@@ -26,6 +27,8 @@ module PgsnapRails
       node ? node[:args] << hsh[:args] : create_node(hsh)
       build_sql
     end
+
+    def defn; end
 
     def build_sql
       @built_sql = Builder.build(nodes)
