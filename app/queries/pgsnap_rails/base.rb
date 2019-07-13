@@ -50,17 +50,5 @@ module PgsnapRails
       node ? node[:args] = Array(hsh[:args]) : create_node(hsh)
       build_sql
     end
-
-    def remove_node(builder_name)
-      nodes.delete(builder_name)
-      build_sql
-    end
-
-    def retrieve_results_from_database
-      return if retrieval_done
-      build_missing_from_clause
-      build_missing_select_command
-      @results = Pg::Results.retrieve(built_sql, self.class.name.demodulize.underscore)
-    end
   end
 end

@@ -26,6 +26,10 @@ module PgsnapRails
       add_node_to_tree(:SelectList, node)
     end
 
+    def add_table(node)
+      add_node_to_tree(:Table, node)
+    end
+
     def all
       retrieve_results_from_database
       @retrieval_done = true
@@ -33,7 +37,7 @@ module PgsnapRails
     end
 
     def columns
-      current_limit = tree[:Limit].count
+      current_limit = tree[:Limit]&.count
       add_limit(Limit.new(0))
       retrieve_results_from_database
       r = results.columns
@@ -56,11 +60,18 @@ module PgsnapRails
     private
 
     def build_sql
-      @built_sql = [
-        tree[:SelectList],
-        tree[:From],
-        tree[:Limit],
-      ].compact.join(' ')
+      if tree[:Table]
+        @built_sql = [
+          tree[:Table],
+          tree[:Limit],
+        ].compact.join(' ')
+      else
+        @built_sql = [
+          tree[:SelectList],
+          tree[:From],
+          tree[:Limit],
+        ].compact.join(' ')
+      end
     end
 
     def results_retrieval_class_name
