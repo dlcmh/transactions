@@ -1,3 +1,7 @@
 module PgsnapRails
-  class Base; end
+  class Base
+    class Error < StandardError; end
+    extend Utils::MethodCallingConvenience
+    include SqlCommands
+  end
 end

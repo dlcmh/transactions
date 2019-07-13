@@ -1,1 +1,3 @@
-class Users < Pgsnap; end
+class Users < Pgsnap
+  table :users
+end
