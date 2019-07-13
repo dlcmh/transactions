@@ -13,6 +13,10 @@ module PgsnapRails
 
     attr_reader :nodes
 
+    def from(from_item)
+      @nodes = Sql::Commands::Select::FromClause.build(from_item)
+    end
+
     # def inspect
     #   'lol'
     # end
