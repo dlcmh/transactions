@@ -9,16 +9,22 @@ module PgsnapRails
 
     private
 
-    attr_reader :builder_name, :nodes
+    attr_reader :builder_name, :built_sql, :nodes, :sql_builder
 
     def initialize
       @nodes = {}
+      @sql_builder = Builder
     end
 
     def append_node(hsh)
       @builder_name = hsh[:builder_name]
       return node[:args] << hsh[:args] if node
       create_node(hsh)
+    end
+
+    def build_sql
+      @built_sql = sql_builder.build(nodes)
+      self
     end
 
     def create_node(hsh)
