@@ -1,9 +1,11 @@
 module PgsnapRails
   module SqlBuildingDotCommands
-    def build_missing_select
-      return if nodes[:select_command]
-      overwrite_node Sql::Commands::Select::SelectCommand.build(:*)
-      self
+    def build_missing_from_clause
+      from(self.class.name.demodulize.underscore) unless nodes[:from_clause]
+    end
+
+    def build_missing_select_command
+      select(:*) unless nodes[:select_command]
     end
 
     def from(from_item)

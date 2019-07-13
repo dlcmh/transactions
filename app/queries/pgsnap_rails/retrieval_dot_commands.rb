@@ -1,7 +1,8 @@
 module PgsnapRails
   module RetrievalDotCommands
     def all
-      build_missing_select
+      build_missing_from_clause
+      build_missing_select_command
       retrieve_results_from_database
       @retrieval_done = true
       results.to_a
