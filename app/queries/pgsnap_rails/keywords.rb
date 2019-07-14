@@ -1,13 +1,5 @@
 module PgsnapRails
   module Keywords
-    def all
-      select_builder.all
-    end
-
-    def columns
-      select_builder.columns
-    end
-
     def from(item)
       add_to_tree From.new(item)
       self
