@@ -12,6 +12,8 @@ module PgsnapRails
 
     attr_reader :builder_name, :built_sql, :nodes, :results, :retrieval_done, :select_builder
 
+    delegate :add_to_tree, :all, :built_sql, :columns, to: :select_builder
+
     def sql
       built_sql
     end
@@ -28,14 +30,6 @@ module PgsnapRails
       @builder_name = hsh[:builder_name]
       node ? node[:args] << hsh[:args] : create_node(hsh)
       build_sql
-    end
-
-    def defn
-      self.table
-    end
-
-    def build_sql
-      @built_sql = Builder.build(nodes)
     end
 
     def create_node(hsh)
