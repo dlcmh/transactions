@@ -27,12 +27,7 @@ module PgsnapRails
       add_to_tree(Limit.new(0))
       retrieve_results_from_database
       results.columns.tap do
-        if current_limit
-          add_to_tree(Limit.new(current_limit))
-        else
-          remove_node_from_tree(:Limit)
-        end
-      end
+      current_limit ? add_to_tree(Limit.new(current_limit)) : remove_node_from_tree(:Limit)
     end
 
     def inspect
