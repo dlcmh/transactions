@@ -19,7 +19,7 @@ module PgsnapRails
     end
 
     def table(table_name = self.class.name.demodulize.underscore)
-      select_builder.add_to_tree Table.new(:categories)
+      select_builder.add_to_tree Table.new(table_name)
       self
     end
   end

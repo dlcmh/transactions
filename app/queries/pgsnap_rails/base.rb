@@ -30,7 +30,9 @@ module PgsnapRails
       build_sql
     end
 
-    def defn; end
+    def defn
+      self.table
+    end
 
     def build_sql
       @built_sql = Builder.build(nodes)

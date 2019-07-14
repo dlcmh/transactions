@@ -1,4 +1,8 @@
 class Debug
+  def self.select_item
+    PgsnapRails::SelectItem.new(:one, 1)
+  end
+
   def self.select_kw
     Users.select(:id)
     Users.select(:id).columns
