@@ -1,7 +1,7 @@
 module PgsnapRails
   class Base
     class Error < StandardError; end
-    include Utils::DelegateArrayMethods
+    include ArrayMethodsForDelegation
     include Keywords
 
     def self.method_missing(method, *args, &block)
@@ -11,6 +11,7 @@ module PgsnapRails
     attr_reader :builder_name, :built_sql, :nodes, :results, :retrieval_done, :select_builder
 
     delegate :add_to_tree, :all, :built_sql, :columns, to: :select_builder
+    delegate *ARRAY_METHODS_FOR_DELEGATION, to: :select_builder
 
     def defn
       self.table
