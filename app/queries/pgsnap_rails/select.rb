@@ -35,6 +35,10 @@ module PgsnapRails
       end
     end
 
+    def inspect
+      all
+    end
+
     def remove_node_from_tree(node_type)
       tree.delete(node_type)
     end

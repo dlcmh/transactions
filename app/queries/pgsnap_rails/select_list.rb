@@ -10,6 +10,7 @@ module PgsnapRails
       @item = item
       validate
       @items << item
+      self
     end
 
     def with(*items)
@@ -17,6 +18,7 @@ module PgsnapRails
       items.each do |item|
         @items << PgsnapRails::SelectItem.new(item)
       end
+      self
     end
 
     def to_s

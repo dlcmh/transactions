@@ -1,4 +1,10 @@
 class Debug
+  def self.select_kw
+    Users.select(:id)
+    Users.select(:id).columns
+    Users.select(:id, :first_name, :last_name).limit(3).all
+  end
+
   def self.items
     select = PgsnapRails::Select.new
     select_list = PgsnapRails::SelectList.new
