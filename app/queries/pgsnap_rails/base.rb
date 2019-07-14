@@ -2,8 +2,6 @@ module PgsnapRails
   class Base
     class Error < StandardError; end
     include Utils::DelegateArrayMethods
-    # include RetrievalDotCommands
-    # include SqlBuildingDotCommands
     include Keywords
 
     def self.method_missing(method, *args, &block)
