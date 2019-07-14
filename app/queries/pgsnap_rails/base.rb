@@ -14,6 +14,10 @@ module PgsnapRails
 
     delegate :add_to_tree, :all, :built_sql, :columns, to: :select_builder
 
+    def defn
+      self.table
+    end
+
     def sql
       built_sql
     end

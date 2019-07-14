@@ -8,13 +8,19 @@ module PgsnapRails
     end
 
     def to_s
-      ['FROM', item].compact.join(' ')
+      ['FROM', source].compact.join(' ')
     end
 
     private
 
     def item__params
       @item, = args
+    end
+
+    def source
+      subquery = item.new.try(:sql)
+      return %[(#{subquery}) "#{item.name.demodulize.underscore}"] if subquery
+      item
     end
 
     def validate

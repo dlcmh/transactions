@@ -8,6 +8,11 @@ module PgsnapRails
       select_builder.columns
     end
 
+    def from(item)
+      add_to_tree From.new(item)
+      self
+    end
+
     def limit(count)
       add_to_tree Limit.new(count)
       self
